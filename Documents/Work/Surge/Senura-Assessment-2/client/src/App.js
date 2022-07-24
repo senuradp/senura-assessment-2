@@ -6,10 +6,10 @@ import Nav from './components/Nav';
 import Adminpanel from './components/Adminpanel';
 import Add from './components/AddUser';
 import Userlist from './components/Userlist';
-
+import EditUser from './components/EditUser';
 
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
-import AddUser from './components/AddUser';
+
 
 function App() {
   return (
@@ -18,8 +18,9 @@ function App() {
         <Nav />
         <Routes>
           <Route exact-path='/' element={<Adminpanel />}/>
-          <Route path='/add' element={<AddUser />}/>
+          <Route path='/add' element={<Add />}/>
           <Route path='/user-list' element={<Userlist />}/>
+          <Route path='/edit/:id' element={<EditUser />}/>
         </Routes>
       </div>
     </Router>
