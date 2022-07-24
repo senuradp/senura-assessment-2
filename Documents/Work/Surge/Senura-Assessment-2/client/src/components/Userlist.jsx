@@ -8,7 +8,7 @@ import {
   styled,
   Button,
 } from "@mui/material";
-import { getUsers } from "../service/api";
+import { getUsers, deleteUser } from "../service/api";
 import { Link } from 'react-router-dom';
 
 const Userlist = () => {
@@ -50,6 +50,11 @@ const Userlist = () => {
     setUsers(response.data);
   };
 
+  const deleteUserRecord = async (id) => {
+    await deleteUser(id);
+    getAllUsers();
+  }
+
   return (
     <div>
       {users ? (
@@ -72,7 +77,7 @@ const Userlist = () => {
           <TableBody>
             {users.map((user) => {
               return (
-                <TBody>
+                <TBody key={user._id}>
                   <TableCell>{user._id}</TableCell>
                   <TableCell>{user.firstName}</TableCell>
                   <TableCell>{user.lastName}</TableCell>
@@ -87,7 +92,7 @@ const Userlist = () => {
                   <EditButton variant="contained" id="editButton" component={Link} to={`/edit/${user._id}`}>
                     Edit
                   </EditButton>
-                  <DeleteButton variant="contained" color="secondary">
+                  <DeleteButton variant="contained" color="secondary" onClick={() => deleteUserRecord(user._id)}>
                     Delete
                   </DeleteButton>
                 </TBody>
