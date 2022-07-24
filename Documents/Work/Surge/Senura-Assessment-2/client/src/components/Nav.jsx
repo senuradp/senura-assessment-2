@@ -1,24 +1,29 @@
-import { AppBar, Toolbar, styled, Tabs } from "@mui/material";
+import { AppBar, Toolbar, styled } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
-// const Header = styled(AppBar)`
-//   background: #111111;
-// `;
+const Header = styled(AppBar)`
+  background: #111111;
+`;
+
+const Tabs = styled(Link)`
+  font-size: 20px;
+  margin-right: 20px;
+  color: inherit;
+  text-decoration: none;
+`;
 
 const Nav = () => {
   return (
-    <AppBar>
+    <Header>
     <div className="header">
       <Toolbar>
-        {/* <div className="tabs"> */}
-          <Link to={'#'}><p id='tab'>Admin Panel</p></Link>
-          <Link to={'/user-list'}><p id='tab'>User List</p></Link>
-          <Link to={'/add'}><p id='tab'>Add User</p></Link>
-        {/* </div> */}
+          <Tabs to={'#'}><p id='tab'>Admin Panel</p></Tabs>
+          <Tabs to={'/user-list'}><p id='tab'>User List</p></Tabs>
+          <Tabs to={'/add'}><p id='tab'>Add User</p></Tabs>
       </Toolbar>
     </div>
-  </AppBar>
+  </Header>
 
   );
 };
