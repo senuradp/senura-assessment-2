@@ -19,6 +19,7 @@ const Nav = () => {
     <div className="header">
       <Toolbar>
           <Tabs to={'#'}><p id='tab'>Admin Panel</p></Tabs>
+          <Tabs to={'/login'}><p id='tab'>Login</p></Tabs>
           <Tabs to={'/user-list'}><p id='tab'>User List</p></Tabs>
           <Tabs to={'/add'}><p id='tab'>Add User</p></Tabs>
       </Toolbar>
