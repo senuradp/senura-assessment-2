@@ -10,4 +10,4 @@ Technologies used are:
 
 Clone the project and run the following commands: 
 
-- run npm i && npm start in both the client and server side to start the development server
+- run npm i && npm start in both the client and server side to start the development server and database
