@@ -1,40 +1,70 @@
-import React, { Component } from 'react';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import {useState} from 'react';
+// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
+import { logUser } from '../service/api';
+import {styled, FormGroup, FormControl, InputLabel , Input, Typography, Button} from "@mui/material";
 
-export default class Login extends Component {
-  render() {
-    return (
-      <div className="login-form-container mt-5">
-        <form className="login-form mt-5">
-          <div className="login-form-content">
-            <h3 className="login-form-title">Sign In</h3>
-            <div className="form-group mt-3">
-              <label>Email address</label>
-              <input
-                type="email"
-                className="form-control mt-1"
-                placeholder="Enter email"
-              />
-            </div>
-            <div className="form-group mt-3">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control mt-1"
-                placeholder="Enter password"
-              />
-            </div>
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-            <p className="forgot-password text-right mt-2">
-              <a href="#"> Reset password?</a>
-            </p>
-          </div>
-        </form>
-      </div>
-    )
+const Container = styled(FormGroup)`
+    width : 50%;
+    margin : 5% auto 0 auto;
+`;
+
+const ContChild = styled(FormControl)`
+    margin-top : 20px;
+`;
+
+const defValue = {
+    email: '',
+    password: ''
   }
+
+
+
+const Login = () => {
+
+
+    const [user, setUser] = useState({defValue});
+
+    const navigate = useNavigate();
+
+    const onValueChange = (e) =>{
+        // console.log(e.target.name, e.target.value)
+        setUser({...user, [e.target.name]: e.target.value});
+        // console.log(user);
+    }
+
+    const logUserBtn = async () => {
+        let data = await logUser(user);  
+
+        if(!data.data.error){
+          console.info(data);
+          localStorage.setItem('TOKEN', data.data.token);
+          localStorage.setItem('USER_TYPE', data.data.user.accountType);
+          navigate('/user-list');
+          refreshPg();
+        }else{
+          alert(data.data.error);
+        }
+     
+    }
+
+    function refreshPg() { window. location. reload(false); }
+
+    return (
+        <Container>
+            <Typography variant="h4">Login</Typography>
+            <ContChild>
+                <InputLabel>Email</InputLabel>
+                <Input onChange={(e) => onValueChange(e)} name="email" type='email'/>
+            </ContChild>
+            <ContChild>
+                <InputLabel>Password</InputLabel>
+                <Input onChange={(e) => onValueChange(e)} name="password" type='password'/>
+            </ContChild>
+            <ContChild>
+                <Button variant="contained" onClick={() => logUserBtn()}>Login</Button>
+            </ContChild>
+        </Container>
+    );
 }
+export default Login;

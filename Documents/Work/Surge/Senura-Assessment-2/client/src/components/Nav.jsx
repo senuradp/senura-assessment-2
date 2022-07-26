@@ -14,6 +14,7 @@ const Tabs = styled(Link)`
 `;
 
 const Nav = () => {
+  
   return (
     <Header>
     <div className="header">
@@ -22,6 +23,7 @@ const Nav = () => {
           <Tabs to={'/login'}><p id='tab'>Login</p></Tabs>
           <Tabs to={'/user-list'}><p id='tab'>User List</p></Tabs>
           <Tabs to={'/add'}><p id='tab'>Add User</p></Tabs>
+          <Tabs to={'/log-out'}><p id='tab'>Logout</p></Tabs>
       </Toolbar>
     </div>
   </Header>

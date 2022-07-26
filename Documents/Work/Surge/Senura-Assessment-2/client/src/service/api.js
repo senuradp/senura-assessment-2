@@ -3,9 +3,13 @@ import axios from "axios";
 
 const URL= 'http://localhost:8080';
 
+const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('TOKEN')}` }
+};
+
 export const addUser = async (data) => {
     try{
-        return await axios.post(`${URL}/add`,data);
+        return await axios.post(`${URL}/add`,data,config);
     }catch(e){
         console.log("Error while calling add user api ", e);
     }
@@ -13,7 +17,7 @@ export const addUser = async (data) => {
 
 export const getUsers = async ()=> {
     try {
-        return await axios.get(`${URL}/user-list`);
+        return await axios.get(`${URL}/user-list`,config);
         
     } catch (er) {
         console.log("Error while calling get user list from api ", er)
@@ -41,5 +45,22 @@ export const deleteUser = async (id) => {
         return axios.delete(`${URL}/${id}`);
     } catch (error) {
         console.log("Error while calling delete user from api ", error)
+    }
+}
+
+export const logUser = async (data) => {
+    try {
+        return axios.post(`${URL}/login`,data);
+    } catch (error) {
+        console.log("Error while calling login user from api ", error)
+    }
+}
+
+
+export const addNotes = async (data) => {
+    try{
+        return await axios.post(`${URL}/add-note`,data,config);
+    }catch(e){
+        console.log("Error while calling add user api ", e);
     }
 }

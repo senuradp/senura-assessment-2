@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { styled, FormGroup, FormControl, InputLabel , Input, Typography, Button } from "@mui/material";
-import { editUser, getUser } from '../service/api';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useState} from 'react';
+import {styled, FormGroup, FormControl, InputLabel , Input, Typography, Button} from "@mui/material";
+import { addUser } from '../../service/api';
+import { useNavigate} from 'react-router-dom';
 
 const Container = styled(FormGroup)`
     width : 50%;
@@ -25,22 +25,11 @@ const defValue = {
 
 
 
-const EditUser = () => {
+const AddUser = () => {
 
     const [user, setUser] = useState({defValue});
 
     const navigate = useNavigate();
-
-    const { id } = useParams();
-
-    useEffect(() => {
-        loadUserDetails();
-    },[]);
-
-    const loadUserDetails = async () => {
-        let response = await getUser(id);
-        setUser(response.data);
-    };
 
     const onValueChange = (e) =>{
         // console.log(e.target.name, e.target.value)
@@ -48,51 +37,51 @@ const EditUser = () => {
         // console.log(user);
     }
 
-    const editUserDetails = async () => {
-        await editUser(user, id);  
+    const addUserDetails = async () => {
+        await addUser(user);  
         navigate('/user-list');
     }
 
     return (
         <Container>
-            <Typography variant="h4">Edit User</Typography>
+            <Typography variant="h4">Add User</Typography>
             <ContChild>
                 <InputLabel>First Name</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name="firstName" value={user.firstName}/>
+                <Input onChange={(e) => onValueChange(e)} name="firstName" type='text'/>
             </ContChild>
             <ContChild>
                 <InputLabel>Last Name</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name="lastName" type='text' value={user.lastName}/>
+                <Input onChange={(e) => onValueChange(e)} name="lastName" type='text'/>
             </ContChild>
             <ContChild>
                 <InputLabel>Email</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name="email" type='email' value={user.email}/>
+                <Input onChange={(e) => onValueChange(e)} name="email" type='email'/>
             </ContChild>
             <ContChild>
                 <InputLabel>Date of Birth</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name="dateOfBirth" type='text' value={user.dateOfBirth}/>
+                <Input onChange={(e) => onValueChange(e)} name="dateOfBirth" type='text'/>
             </ContChild>
             <ContChild>
                 <InputLabel>Mobile</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name="mobile"  type='number' value={user.mobile}/>
+                <Input onChange={(e) => onValueChange(e)} name="mobile"  type='number'/>
             </ContChild>
-            {/* <ContChild> 
+            {/* <ContChild>
                 <InputLabel>Status</InputLabel>
                 <Input onChange={(e) => onValueChange(e)} name="status"  type='boolean'/>
             </ContChild> */}
             <ContChild>
                 <InputLabel>Password</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name="password" type='password' value={user.password}/>
+                <Input onChange={(e) => onValueChange(e)} name="password" type='password'/>
             </ContChild>
             <ContChild>
                 <InputLabel>Account Type (Admin / Student)</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name="accountType" type='text' value={user.accountType}/>
+                <Input onChange={(e) => onValueChange(e)} name="accountType" type='text'/>
             </ContChild>
             <ContChild>
-                <Button variant="contained" onClick={() => editUserDetails()}>Edit User</Button>
+                <Button variant="contained" onClick={() => addUserDetails()}>Add User</Button>
             </ContChild>
         </Container>
     );
 }
 
-export default EditUser;
+export default AddUser;

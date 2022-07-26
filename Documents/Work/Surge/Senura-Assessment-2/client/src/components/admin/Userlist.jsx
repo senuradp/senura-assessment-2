@@ -8,7 +8,7 @@ import {
   styled,
   Button,
 } from "@mui/material";
-import { getUsers, deleteUser } from "../service/api";
+import { getUsers, deleteUser } from "../../service/api";
 import { Link } from 'react-router-dom';
 
 const Userlist = () => {
@@ -65,7 +65,7 @@ const Userlist = () => {
               <THCell>Id</THCell>
               <THCell>First Name</THCell>
               <THCell>Last Name</THCell>
-              <THCell>Emaiil</THCell>
+              <THCell>Email</THCell>
               <THCell>Date of Birth</THCell>
               <THCell>Mobile</THCell>
               <THCell>Status</THCell>
