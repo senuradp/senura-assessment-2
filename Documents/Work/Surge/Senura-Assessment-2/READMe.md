@@ -1,5 +1,6 @@
 # [Assessment 2 - Senura Perera]
 
+This application is a  place where admins can create users based on 2 categories either students or admins
 
 Technologies used are:
 - Node js (Express js framework) for the backend
