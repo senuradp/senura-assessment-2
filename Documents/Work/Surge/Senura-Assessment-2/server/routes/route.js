@@ -1,11 +1,14 @@
 import express from "express";
 
-import { addUser, getUsers, getUser, editUser, deleteUser} from "../controller/user-controller.js";
+import { addUser, getUsers, getUser, editUser, deleteUser, loginUser, addNotes} from "../controller/user-controller.js";
+import { authenticateJWT } from "../middleware/middleware.js";
 
 const router = express.Router();
 
-router.post('/add', addUser);
-router.get('/user-list', getUsers);
+router.post('/login', loginUser);
+router.post('/add', authenticateJWT, addUser);
+router.post('/add-note',authenticateJWT,addNotes);
+router.get('/user-list',authenticateJWT, getUsers);
 router.get('/:id', getUser);
 router.put('/:id', editUser);
 router.delete('/:id', deleteUser);
